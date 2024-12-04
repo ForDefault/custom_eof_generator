@@ -37,17 +37,15 @@ create_layer() {
     local layer_content="$2"    # Content for the layer
     local heredoc_delim="$3"    # Heredoc delimiter for the current layer
 
-    echo "Creating ${layer_name}.sh..."
+#    echo "Creating ${layer_name}.sh..."
 
     # Create the temporary script
     cat <<EOF > "${layer_name}.sh"
 #!/bin/bash
 # Temporary script: ${layer_name}
 echo "Executing ${layer_name}.sh"
-
 ${layer_content}
 
-echo "Completed ${layer_name}.sh"
 EOF
 
     # Make the script executable
@@ -63,32 +61,23 @@ EOF
 
 # Step 4: Prepare Layer 2 content with user's input
 layer2_content=$(cat <<EOL
-# Create and execute layer2
-cat <<'INNERDOX' > layer2.sh
+            cat <<'INNERDOX' > layer2.sh
 #!/bin/bash
-# Temporary script: layer2
-echo "Executing layer2.sh"
 
-# User content from xed:
 ${content}
-
-echo "Completed layer2.sh"
 INNERDOX
-
-chmod +x layer2.sh
-./layer2.sh
-rm -f layer2.sh
+            chmod +x layer2.sh
+            ./layer2.sh
+            rm -f layer2.sh
 EOL
 )
 
 # Step 5: Create Layer 1 with Layer 2 content
 layer1_content="#!/bin/bash
-# Temporary script: layer1
-echo \"Executing layer1.sh\"
 
 ${layer2_content}
 
-echo \"Completed layer1.sh\""
+"
 
 # Copy the combined Layer 1 script to the clipboard
 echo "$layer1_content" | xclip -selection clipboard
