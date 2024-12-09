@@ -1,8 +1,9 @@
 # custom_eof_generator
 
-**Custom EOF Generator**: A tool to dynamically embed, execute, and remove: for direct terminal launching or for temporary scripts within other Bash scripts( especially useful for loops or iterative tasks).
+**Custom EOF Generator**: A tool to dynamically embed, execute, and remove: for direct terminal launching or for temporary scripts within other Bash scripts( especially useful for loops or iterative tasks). 
+**Auto-generates for both python and bash**
 
-> Personal Note: I do not like having to create a file, make it executable, especially on remote devices. So I can use this to test scripts quickly and it cleans itself up afterwards. This way I can just do tests quickly. 
+> Personal Note: I do not like the hassle of testing scripts... create a file, make it executable, then typing a command to launch; especially on remote devices. So I can use this to test scripts quickly and it cleans itself up afterwards. This way I can just do tests quickly. 
 
 ---
 
