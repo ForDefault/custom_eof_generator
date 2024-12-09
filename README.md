@@ -4,7 +4,7 @@
 
 **Automatically Distinguishes input as either python and bash**
 
-> Personal Note: I do not like the hassle of testing scripts... create a file, make it executable, then typing a command to launch; especially on remote devices. So I can use this to test scripts quickly and it cleans itself up afterwards. This way I can just do tests quickly. 
+> Personal Note: I do not like the hassle of testing scripts... create a file, make it executable, then typing a command to launch; especially on remote devices. 
 
 ---
 
