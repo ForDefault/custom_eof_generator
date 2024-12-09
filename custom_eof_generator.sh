@@ -12,6 +12,9 @@
 #             \/       \/ |__|             \/     \/             \/      \/      \/      \/        
 
 
+#!/bin/bash
+
+
 # Install xclip if not installed
 if ! command -v xclip &>/dev/null; then
     echo "xclip not found. Installing..."
@@ -30,6 +33,24 @@ content=$(<tempfile.txt)
 # Step 3: Use the content as layer2_logic
 # Ensure special characters are properly escaped
 escaped_content=$(printf '%s\n' "$content" | sed 's/[\/&]/\\&/g')
+    # Determine the file extension based on content
+if [[ $content == import* ]]; then
+    layer2_filename="layer2.py"
+else
+    layer2_filename="layer2.sh"
+fi
+# Determine the top_encoding content
+if [[ $content == import*  ]]; then
+    top_encoding=""
+else
+    top_encoding="#!/bin/bash"
+fi
+# Determine the command to execute based on top_encoding
+if [[ $content == import* ]]; then
+    run_command="python3 " 
+else
+    run_command="./"
+fi
 
 # Function to create and execute a layer
 create_layer() {
@@ -61,14 +82,14 @@ EOF
 
 # Step 4: Prepare Layer 2 content with user's input
 layer2_content=$(cat <<EOL
-            cat <<'INNERDOX' > layer2.sh
-#!/bin/bash
+            cat <<'INNERDOX' > $layer2_filename
+$top_encoding
 
 ${content}
 INNERDOX
-            chmod +x layer2.sh
-            ./layer2.sh
-            rm -f layer2.sh
+            chmod +x $layer2_filename
+            $run_command$layer2_filename
+            rm -f $layer2_filename
 EOL
 )
 
